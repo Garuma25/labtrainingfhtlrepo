@@ -1,0 +1,22 @@
+name: Lint with Prettier
+on: [pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with: 
+          token: ${{secrets.SECRETTOKEN}}
+      - name: Setup node with correct version
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.15.0 
+      - name: Install prettier
+        run: npm install prettier
+      - name: Run linters
+        uses: wearerequired/lint-action@v2
+        with:
+          auto_fix: false
+          prettier: true
